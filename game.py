@@ -12,7 +12,7 @@ class Game:
     display the piece count, display the player names, update the board, check for a winner, select a piece, move a piece, show available moves, change the turn,
     get the board, and move an AI piece.
     """
-    def __init__(self, win, color, player1, player2):
+    def __init__(self, win, color, player1, player2,news):
         """
         The init function initializes the Game class with a window, color, player1, and player2, and sets the turn start time and turn timeout. The text color is set to white,
         and the urgent text color is set to red. The screen is set to the window size, and the player names are set to player1 and player2.
@@ -31,6 +31,7 @@ class Game:
         self.screen = pygame.display.set_mode((1000, 700))
         self.player1 = player1
         self.player2 = player2
+        self.news = news
         
     def check_turn_timeout(self):
         """
@@ -82,6 +83,11 @@ class Game:
         self.screen.blit(text_surface, (715, 350))
         self.screen.blit(text_surface2, (715, 400))
 
+    def display_news(self):
+        post_title = self.news['title']
+        post_link = self.news['permalink']
+        print(post_title)
+
     def update(self): 
         """
         The update function updates the board to show the current board and features.
@@ -92,6 +98,7 @@ class Game:
         self.display_turn()
         self.display_piece_count()
         self.display_player_names(self.player1, self.player2)
+        self.display_news()
         pygame.display.update()
         
     def winner(self): 

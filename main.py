@@ -6,6 +6,7 @@ The main file holds menu operations for the game including sound, settings, lead
 
 # Testing line for pushing
 import pygame
+import requests
 from SecondMenu import SecondMenu
 from constants import BLUE, YELLOW, RED, GREEN
 from ScoreManager import ScoreManager
@@ -74,6 +75,7 @@ def main():
     running = True
     while running:
         # did the user click the window close button?
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False

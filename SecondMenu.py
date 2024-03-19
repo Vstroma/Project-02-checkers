@@ -4,6 +4,7 @@ The SecondMenu file and class powers the second menu of the game, which allows t
 The class also creates an object of the game class to create the game the users plays.
 """
 import pygame
+import requests
 from Player import Player
 from Player import user_scores
 from ScoreManager import ScoreManager
@@ -25,6 +26,21 @@ player2_name = Player("Player 2", 0)
 score_manager = ScoreManager("user_data/user_data.json")
 cursor_color = (100, 100, 100) # darker grey
 color = (128, 128, 128) # grey
+
+
+# function to get the top reddit post from r/temple
+def get_news():
+    templeUrl = 'https://www.reddit.com/r/Temple/top.json?sort=top&t=hour'
+    response = requests.get(templeUrl)
+    # incase we get 429 error
+    while(response.status_code == 429):
+        response = requests.get(templeUrl)
+    if response.status_code == 200:
+        data = response.json()
+        top_post = data['data']['children'][0]['data']
+    else:
+        print(f"Error fetching data. Status code",response.status_code)
+    return top_post
 
 def get_row_col_from_mouse(pos):
     """
@@ -191,9 +207,11 @@ class SecondMenu:
         """
         The start game vs player function starts the game against another player by creating an object of the game class and passing the screen, color, and player names.
         """
+        # Get the news at the start of every game
+        news = get_news()
         run = True
         clock = pygame.time.Clock()
-        game = Game(screen, self.color, player1_name.username, player2_name.username)
+        game = Game(screen, self.color, player1_name.username, player2_name.username,news)
         global score_manager, user_scores
 
         # Exit Button
