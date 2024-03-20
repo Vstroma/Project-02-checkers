@@ -1,4 +1,4 @@
-# Welcome to Checkers+!
+# Welcome to Checkers+! Contributed by Nick Pelletier Joe Zhou and Vincent Schetroma
 Checkers+ is an exciting Python-based game that offers a modern twist on the classic game of checkers. Upon launching the game, users are presented with a prompt to choose between two game modes: Player vs. Player (PvP) or Player vs. AI. The game adheres to standard checkers rules with a few intriguing alterations. Checkers+ is a game for people of all ages and skill levels. This game is a continuation of code and game logic from this repository: https://github.com/techwithtim/Python-Checkers-AI. We hope you enjoy! 
 
 # Build Overview
@@ -23,7 +23,7 @@ simply run the application from inside the folder.
 
 # Build and Installation Guide (MAC)
 - We currently do not have MAC instructions for the Checkers+ application. We hope to have this in future releases.
-
+- In order to run the Checkers+ application on MAC, you must clone the repository and run the program on your local MAC
 # Brainstorming Board
 - This board contains the initial features list as a path we would expect an intermediate player to take using Checkers+.
 - https://lucid.app/lucidspark/128ef961-9edf-4a88-8eaf-992d7faa5d74/edit?viewport_loc=-350%2C-445%2C3025%2C1429%2C0_0&invitationId=inv_e2d583a2-18f2-4676-8253-7a01ce813867

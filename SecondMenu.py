@@ -30,6 +30,9 @@ color = (128, 128, 128) # grey
 
 # function to get the top reddit post from r/temple
 def get_news():
+    """
+    This function will get the top Reddit post from the Temple subreddit.
+    """
     templeUrl = 'https://www.reddit.com/r/Temple/top.json?sort=top&t=hour'
     response = requests.get(templeUrl)
     # incase we get 429 error
