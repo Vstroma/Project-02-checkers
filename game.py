@@ -84,10 +84,35 @@ class Game:
         self.screen.blit(text_surface2, (715, 400))
 
     def display_news(self):
+        alert_box = pygame.Rect(700,450,280,200)
+        pygame.draw.rect(self.screen,RED,alert_box)
+
+        font = pygame.font.Font(None,25)
+        linkfont = pygame.font.Font(None, 18)
+
+        alert_title = "TOP NEWS IN r/TEMPLE"
         post_title = self.news['title']
         post_link = self.news['permalink']
-        print(post_title)
 
+        # shorten the link since its too long to fit on screen
+        # we can do this by only including up to the fifth " / " in the link.
+        # needle in haystack method
+        n = 5
+        start = post_link.find("/")
+        while start >= 0 and n > 1:
+            start = post_link.find("/", start+len("/"))
+            n -= 1
+        
+        # Slice link to get rid of the unneeded end
+        post_link = post_link[:start]       
+
+        alert_title_surface = font.render(alert_title,True,WHITE)
+        post_title_surface = font.render('"' + post_title + '"',True,WHITE)
+        post_link_surface = linkfont.render("reddit.com" + post_link,True,WHITE)
+
+        self.screen.blit(alert_title_surface,(735,460))
+        self.screen.blit(post_title_surface,(700,500))
+        self.screen.blit(post_link_surface,(700,540))
     def update(self): 
         """
         The update function updates the board to show the current board and features.

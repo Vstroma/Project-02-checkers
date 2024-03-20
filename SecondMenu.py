@@ -256,9 +256,11 @@ class SecondMenu:
         """
         The start game vs computer function starts the game against the computer by creating an object of the game class and passing the screen, color, and player name.
         """
+        # Get the news at the start of every game
+        news = get_news()
         run = True
         clock = pygame.time.Clock()
-        game = Game(screen, self.color, player1_name.username, "Computer")
+        game = Game(screen, self.color, player1_name.username, "Computer",news)
         global score_manager, user_scores
 
         # Exit Button
