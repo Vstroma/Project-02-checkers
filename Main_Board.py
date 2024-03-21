@@ -151,6 +151,11 @@ class Main_Board:
             moves.update(self.move_left(row +1, min(row+3, ROWS), 1, piece.color, left))
             moves.update(self.move_right(row +1, min(row+3, ROWS), 1, piece.color, right))
 
+        if piece.queen:
+            # Queen vertical movements
+            moves.update(self.move_up(row - 1, -1, -1, piece.color, piece.col))
+            moves.update(self.move_down(row + 1, ROWS, 1, piece.color, piece.col))
+
         return moves
 
     def move_left(self, start, stop, step, color, left, skipped=[]): 
@@ -220,6 +225,50 @@ class Main_Board:
 
             right += 1
         
+        return moves
+    
+
+    def move_up(self, start, stop, step, color, col, skipped=[]):
+
+        moves = {}
+        last = []
+        for r in range(start, stop, step):
+            if r < 0:
+                break
+            current = self.board[r][col]
+            if current == 0:
+                if skipped and not last:
+                    break
+                elif skipped:
+                    moves[(r, col)] = last + skipped
+                else:
+                    moves[(r, col)] = last
+                break
+            elif current.color == color:
+                break
+            else:
+                last = [current]
+        return moves
+    
+    def move_down(self, start, stop, step, color, col, skipped=[]):
+        moves = {}
+        last = []
+        for r in range(start, stop, step):
+            if r >= ROWS:
+                break
+            current = self.board[r][col]
+            if current == 0:
+                if skipped and not last:
+                    break
+                elif skipped:
+                    moves[(r, col)] = last + skipped
+                else:
+                    moves[(r, col)] = last
+                break
+            elif current.color == color:
+                break
+            else:
+                last = [current]
         return moves
     
     def no_moves(self, color): 
