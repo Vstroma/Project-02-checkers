@@ -17,3 +17,4 @@ SQUARE_SIZE = 85
 WIDTH, HEIGHT = 1000,1000
 
 KING = pygame.transform.scale(pygame.image.load('pics/king_icon.png'), (44, 25)) # for king piece
+QUEEN = pygame.transform.scale(pygame.image.load('pics/queen_icon.png'), (44, 25)) # for queen pieces   //

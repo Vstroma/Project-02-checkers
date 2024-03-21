@@ -3,7 +3,7 @@ Pieces.py
 The Pieces File holds the Pieces class which is responsible for managing the pieces.
 """
 
-from constants import SQUARE_SIZE, GREY, KING
+from constants import SQUARE_SIZE, GREY, KING, QUEEN
 import pygame
 
 class Piece:
@@ -22,6 +22,7 @@ class Piece:
         self.col = col
         self.color = color
         self.king = False
+        self.queen = False  
         self.x = 0
         self.y = 0
         self.calc_pos()
@@ -38,16 +39,24 @@ class Piece:
         The make king function makes a piece a king piece.
         """
         self.king = True
-    
+
+    def make_queen(self):           
+        """
+        The make queen function makes a piece a queen piece.        //
+        """
+        self.queen = True
+
     def draw(self, win):
         """
-        The draw function draws the piece on the board.
+        The draw function draws the piece on the board.                 // if queen criteria draw queen piece on checker
         """
         radius = SQUARE_SIZE//2 - self.PADDING
         pygame.draw.circle(win, GREY, (self.x, self.y), radius + self.OUTLINE)
         pygame.draw.circle(win, self.color, (self.x, self.y), radius)
         if self.king:
             win.blit(KING, (self.x - KING.get_width()//2, self.y - KING.get_height()//2))
+        if self.queen:                                                                              
+            win.blit(QUEEN, (self.x - QUEEN.get_width()//2, self.y - QUEEN.get_height()//2))        
 
     def move(self, row, col): 
         """

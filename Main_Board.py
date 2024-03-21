@@ -21,6 +21,7 @@ class Main_Board:
         self.color = color
         self.red_left = self.white_left = 12
         self.red_kings = self.white_kings = 0
+        self.red_queens = self.white_queens = 0
         self.create_board()
     
     def draw_squares(self, win):
@@ -61,6 +62,12 @@ class Main_Board:
                 self.white_kings += 1
             else:
                 self.red_kings += 1 
+        if row == ROWS - 2 or row == 1:
+            piece.make_queen()
+            if piece.color == WHITE:
+                self.white_queens += 1
+            else:
+                self.red_queens += 1 
 
     def get_piece(self, row, col): 
         """
@@ -137,6 +144,12 @@ class Main_Board:
         if piece.color == WHITE or piece.king:
             moves.update(self.move_left(row +1, min(row+3, ROWS), 1, piece.color, left))
             moves.update(self.move_right(row +1, min(row+3, ROWS), 1, piece.color, right))
+        if piece.color == RED or piece.queen:
+            moves.update(self.move_left(row -1, max(row-3, -1), -1, piece.color, left))
+            moves.update(self.move_right(row -1, max(row-3, -1), -1, piece.color, right))
+        if piece.color == WHITE or piece.queen:
+            moves.update(self.move_left(row +1, min(row+3, ROWS), 1, piece.color, left))
+            moves.update(self.move_right(row +1, min(row+3, ROWS), 1, piece.color, right))
 
         return moves
 
@@ -196,7 +209,7 @@ class Main_Board:
                     if step == -1:
                         row = max(r-3, -1)
                     else:
-                        row = min(r+3, ROWS)
+                        row = min(r+3, ROWS)        ####
                     moves.update(self.move_left(r+step, row, step, color, right-1,skipped=last))
                     moves.update(self.move_right(r+step, row, step, color, right+1,skipped=last))
                 break
