@@ -2,6 +2,7 @@
 Game.py
 The game file holds the game logic and game class.
 """
+from argparse import RawTextHelpFormatter
 import pygame
 from constants import RED, WHITE, YELLOW, SQUARE_SIZE
 from Main_Board import Main_Board
@@ -87,32 +88,34 @@ class Game:
         alert_box = pygame.Rect(700,450,280,200)
         pygame.draw.rect(self.screen,RED,alert_box)
 
-        font = pygame.font.Font(None,25)
-        linkfont = pygame.font.Font(None, 18)
+        font = pygame.font.Font(None,22)
+        text_font = pygame.font.Font(None, 16)
 
         alert_title = "TOP NEWS IN r/TEMPLE"
         post_title = self.news['title']
-        post_link = self.news['permalink']
+        post_text = self.news['selftext']
 
-        # shorten the link since its too long to fit on screen
-        # we can do this by only including up to the fifth " / " in the link.
-        # needle in haystack method
-        n = 5
-        start = post_link.find("/")
-        while start >= 0 and n > 1:
-            start = post_link.find("/", start+len("/"))
-            n -= 1
-        
-        # Slice link to get rid of the unneeded end
-        post_link = post_link[:start]       
+        # Split the text in half so it fits on the screen
+        post_text_len = len(post_text)
+        midpoint = post_text_len // 2
+        text_first_half = post_text[:midpoint]
+        text_second_half = post_text[midpoint:]
+
+
+      
 
         alert_title_surface = font.render(alert_title,True,WHITE)
         post_title_surface = font.render('"' + post_title + '"',True,WHITE)
-        post_link_surface = linkfont.render("reddit.com" + post_link,True,WHITE)
+        text_first_half_surface = text_font.render(text_first_half,True,WHITE)
+        text_second_half_surface = text_font.render(text_second_half,True,WHITE)
 
         self.screen.blit(alert_title_surface,(735,460))
         self.screen.blit(post_title_surface,(700,500))
-        self.screen.blit(post_link_surface,(700,540))
+        self.screen.blit(text_first_half_surface,(700,540))
+        self.screen.blit(text_second_half_surface,(700,550))
+
+
+
     def update(self): 
         """
         The update function updates the board to show the current board and features.
