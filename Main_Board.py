@@ -62,12 +62,16 @@ class Main_Board:
                 self.white_kings += 1
             else:
                 self.red_kings += 1 
-        if row == ROWS - 2 or row == 1:
+
+        if row == ROWS - 2 and piece.color == WHITE:
+            print("on row - 2 with piece color white")
             piece.make_queen()
-            if piece.color == WHITE:
-                self.white_queens += 1
-            else:
-                self.red_queens += 1 
+            self.white_queens += 1
+
+        if row == 1 and piece.color == RED:
+            print("on row row 1 with piece color red")
+            piece.make_queen()
+            self.red_queens += 1
 
     def get_piece(self, row, col): 
         """

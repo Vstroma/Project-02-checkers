@@ -33,7 +33,7 @@ def get_news():
     """
     This function will get the top Reddit post from the Temple subreddit.
     """
-    templeUrl = 'https://www.reddit.com/r/Temple/top.json?sort=top&t=hour'
+    templeUrl = 'https://www.reddit.com/r/Temple/top.json?sort=top&t=day'
     response = requests.get(templeUrl)
     # incase we get 429 error
     while(response.status_code == 429):
