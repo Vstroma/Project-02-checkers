@@ -38,6 +38,11 @@ class Piece:
         """
         The make king function makes a piece a king piece.
         """
+        print(self.queen)
+        print(self.king)
+        if self.queen == True:
+            self.queen = False
+        print(self.queen)
         self.king = True
 
     def make_queen(self):           

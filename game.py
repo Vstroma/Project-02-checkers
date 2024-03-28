@@ -2,7 +2,6 @@
 Game.py
 The game file holds the game logic and game class.
 """
-from argparse import RawTextHelpFormatter
 import pygame
 from constants import RED, WHITE, YELLOW, SQUARE_SIZE
 from Main_Board import Main_Board
