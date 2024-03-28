@@ -47,6 +47,8 @@ class Piece:
         """
         The make queen function makes a piece a queen piece.        //
         """
+        if self.king == True:
+            return
         self.queen = True
 
     def draw(self, win):
